@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SATU TERNAK - Solusi Peternakan Modern</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Menggunakan font Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* CSS untuk scroller ulasan */
+        .scroller {
+            overflow: hidden;
+            -webkit-mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+            mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+        }
+        .scroller-inner {
+            display: flex;
+            gap: 1.5rem; /* Jarak antar kartu ulasan */
+            padding-block: 1rem;
+            width: max-content;
+            animation: scroll 60s linear infinite;
+        }
+        @keyframes scroll {
+            to {
+                transform: translateX(calc(-50% - 0.75rem));
+            }
+        }
+        
+        /* CSS untuk loader */
+        .loader {
+            width: 60px;
+            aspect-ratio: .5;
+            display: grid;
+            margin: 1rem auto;
+        }
+        .loader:before {
+            content: "";
+            width: 30%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            margin: auto auto 0;
+            background: #CF4647;
+            animation: l9-0 .5s cubic-bezier(0,800,1,800) infinite;
+        }
+        .loader:after {
+            content: "";
+            width: 100%;
+            aspect-ratio: 1/cos(30deg);
+            margin: 0 auto auto;
+            clip-path: polygon(50% -50%,100% 50%,50% 150%,0 50%);
+            background: #524656;
+            animation: l9-1 .5s linear infinite;
+        }
+        @keyframes l9-0 {
+            0%,2%  {translate: 0   0%}
+            98%,to {translate: 0 -.2%}
+        }
+        @keyframes l9-1 {
+            0%,5%  {rotate:  0deg}
+            95%,to {rotate:-60deg}
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+
+    <!-- Header dan Navigasi -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <div>
+                    <h1 class="text-2xl font-bold text-green-600">SATU TERNAK</h1>
+                    <p class="text-sm text-gray-500">by Mas Abdi</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex items-center space-x-6">
+                <a href="#dashboard" class="text-gray-600 hover:text-green-600 font-medium">Dashboard</a>
+                <a href="#tentang" class="text-gray-600 hover:text-green-600 font-medium">Tentang</a>
+                <a href="#aplikasi" class="text-gray-600 hover:text-green-600 font-medium">Aplikasi</a>
+                <a href="#ulasan" class="text-gray-600 hover:text-green-600 font-medium">Ulasan</a>
+                <a href="#hubungi" class="bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600 font-medium">Hubungi</a>
+            </nav>
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-gray-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Menu Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#dashboard" class="block py-2 text-gray-600 hover:text-green-600">Dashboard</a>
+            <a href="#tentang" class="block py-2 text-gray-600 hover:text-green-600">Tentang</a>
+            <a href="#aplikasi" class="block py-2 text-gray-600 hover:text-green-600">Aplikasi</a>
+            <a href="#ulasan" class="block py-2 text-gray-600 hover:text-green-600">Ulasan</a>
+            <a href="#hubungi" class="block py-2 mt-2 bg-green-500 text-white text-center rounded-full hover:bg-green-600">Hubungi</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Bagian Dashboard -->
+        <section id="dashboard" class="relative bg-cover bg-center py-24" style="background-image: url('https://i.postimg.cc/Xv8YxZVy/Background-Lapang.png');">
+            <div class="absolute inset-0 bg-black/50"></div>
+            <div class="container mx-auto px-6 relative z-10">
+                <div class="text-center text-white mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold">SELAMAT DATANG DI SATU TERNAK</h2>
+                    <p class="text-lg md:text-xl mt-4">Solusi Cerdas untuk Peternakan Modern Anda</p>
+                </div>
+                <div class="grid lg:grid-cols-3 gap-8">
+                    <div class="lg:col-span-1 bg-green-600 text-white p-8 rounded-lg shadow-lg flex flex-col justify-center">
+                        <h3 class="text-3xl font-bold mb-4">Kenapa SATU TERNAK?</h3>
+                        <p class="mb-6">
+                            Software pintar berbasis AI untuk membantu peternak menghitung ransum, memantau kesehatan, mengukur Index Performa (IP), dan menganalisis finansial secara terpadu.
+                        </p>
+                        <a href="#tentang" class="bg-white text-green-600 font-bold py-2 px-6 rounded-full self-start hover:bg-gray-200 transition-colors">
+                            Pelajari Lebih Lanjut &rarr;
+                        </a>
+                    </div>
+                    <div class="lg:col-span-2 grid md:grid-cols-3 gap-8">
+                        <div class="bg-white/90 backdrop-blur-sm p-6 rounded-lg shadow-lg text-center flex flex-col justify-center items-center">
+                            <svg class="w-12 h-12 mx-auto text-green-600 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+                            </svg>
+                            <h4 class="text-xl font-bold mb-2">Akses Fleksibel</h4>
+                            <p class="text-gray-600">Dapat diakses di mana saja dan kapan saja, bahkan di HP spesifikasi rendah.</p>
+                        </div>
+                        <div class="bg-white/90 backdrop-blur-sm p-6 rounded-lg shadow-lg text-center flex flex-col justify-center items-center">
+                            <svg class="w-12 h-12 mx-auto text-green-600 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+                            </svg>
+                            <h4 class="text-xl font-bold mb-2">Analisa Akurat</h4>
+                            <p class="text-gray-600">Hitung Index Performa (IP) dan parameter lainnya dengan rumus terstandar.</p>
+                        </div>
+                        <div class="bg-white/90 backdrop-blur-sm p-6 rounded-lg shadow-lg text-center flex flex-col justify-center items-center">
+                             <svg class="w-12 h-12 mx-auto text-green-600 mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                               <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 1 1-18 0 9 9 0 0 1 18 0Zm-9 3.75h.008v.008H12v-.008Z" />
+                             </svg>
+                            <h4 class="text-xl font-bold mb-2">Dukungan Penuh</h4>
+                            <p class="text-gray-600">Kami menyediakan dukungan 24/7 untuk membantu menjawab semua pertanyaan Anda.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian Tentang -->
+        <section id="tentang" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-4">Tentang SATU TERNAK</h2>
+                <p class="max-w-3xl mx-auto text-center text-gray-600">
+                    SATU TERNAK adalah software pintar berbasis AI yang membantu peternak dalam menghitung ransum, memantau kesehatan dan obat, mengukur Index Performa (IP), serta menganalisis finansial secara terpadu untuk meningkatkan efisiensi dan produktivitas usaha ternak.
+                </p>
+            </div>
+        </section>
+        
+        <!-- Bagian Aplikasi -->
+        <section id="aplikasi" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-12">Aplikasi SATU TERNAK</h2>
+                
+                <!-- Grid Ikon Aplikasi -->
+                <div id="app-icons" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                    <!-- Hitung IP Ternak -->
+                    <div id="show-ip-calculator" class="bg-green-500 text-white p-6 rounded-lg shadow-lg text-center flex flex-col justify-center items-center cursor-pointer hover:bg-green-600 transition-colors aspect-square">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 00-1 1v2a1 1 0 001 1h6a1 1 0 001-1V5a1 1 0 00-1-1H7zM6 12a1 1 0 011-1h2a1 1 0 110 2H7a1 1 0 01-1-1zm5 1a1 1 0 100-2h.01a1 1 0 100 2H11zm-5 3a1 1 0 011-1h2a1 1 0 110 2H7a1 1 0 01-1-1zm5 1a1 1 0 100-2h.01a1 1 0 100 2H11z" clip-rule="evenodd" />
+                          <path d="M9 15a1 1 0 11-2 0 1 1 0 012 0z" />
+                        </svg>
+                        <h4 class="text-md font-bold">Hitung IP Ternak</h4>
+                    </div>
+                    <!-- Ransum Ternak -->
+                    <div class="bg-green-500 text-white p-6 rounded-lg shadow-lg text-center flex flex-col justify-center items-center aspect-square">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4" viewBox="0 0 24 24" fill="currentColor"><path d="M16 5.44c0-1.8-1.2-3.44-3-3.44s-3 1.64-3 3.44S11.2 8 13 8s3-1.64 3-3.44zM13 9c-2.33 0-4.29 1.58-4.82 3.75C6.49 12.87 5 14.79 5 17v1c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-1c0-2.21-1.49-4.13-3.18-4.25C17.29 10.58 15.33 9 13 9z"/></svg>
+                        <h4 class="text-md font-bold">[UJI COBA] Ransum Ternak</h4>
+                    </div>
+                    <!-- Finansial Ternak -->
+                     <div class="bg-green-500 text-white p-6 rounded-lg shadow-lg text-center flex flex-col justify-center items-center aspect-square">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg>
+                        <h4 class="text-md font-bold">[UJI COBA] Finansial Ternak</h4>
+                    </div>
+                    <!-- Cari RealTime -->
+                     <div class="bg-green-500 text-white p-6 rounded-lg shadow-lg text-center flex flex-col justify-center items-center aspect-square">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
+                        </svg>
+                        <h4 class="text-md font-bold">[UJI COBA] Cari RealTime</h4>
+                    </div>
+                    <!-- Analisa Kualitas Daging -->
+                     <div class="bg-green-500 text-white p-6 rounded-lg shadow-lg text-center flex flex-col justify-center items-center aspect-square">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4" viewBox="0 0 24 24" fill="currentColor"><path d="M17.63 5.84C17.27 5.33 16.67 5 16 5s-1.27.33-1.63.84L12 10.42 9.63 5.84C9.27 5.33 8.67 5 8 5s-1.27.33-1.63.84L3 12.42V17c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-4.58l-3.37-6.58zM15 15H9v-1.42l3-5.15 3 5.15V15z"/></svg>
+                        <h4 class="text-md font-bold">[UJI COBA] Analisa Kualitas Daging</h4>
+                    </div>
+                    <!-- DokTanya -->
+                    <div class="bg-green-500 text-white p-6 rounded-lg shadow-lg text-center flex flex-col justify-center items-center aspect-square">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" /><path fill-rule="evenodd" d="M10 9a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1H8a1 1 0 110-2h1V10a1 1 0 011-1z" clip-rule="evenodd" /></svg>
+                        <h4 class="text-md font-bold">[UJI COBA] DokTanya</h4>
+                    </div>
+                    <!-- Cari Rumah Sakit -->
+                    <div class="bg-green-500 text-white p-6 rounded-lg shadow-lg text-center flex flex-col justify-center items-center aspect-square">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /><path d="M10 9a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1H8a1 1 0 110-2h1V10a1 1 0 011-1z" /></svg>
+                        <h4 class="text-md font-bold">[UJI COBA] Cari Rumah Sakit</h4>
+                    </div>
+                    <!-- Analisa AI -->
+                    <div class="bg-green-500 text-white p-6 rounded-lg shadow-lg text-center flex flex-col justify-center items-center aspect-square">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5zm4 4h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
+                        <h4 class="text-md font-bold">[UJI COBA] Analisa AI</h4>
+                    </div>
+                    <!-- Daftar Anggota -->
+                    <div class="bg-green-500 text-white p-6 rounded-lg shadow-lg text-center flex flex-col justify-center items-center aspect-square">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" /></svg>
+                        <h4 class="text-md font-bold">Daftar Anggota</h4>
+                    </div>
+                </div>
+
+                <!-- Wrapper Kalkulator IP Ternak (hidden) -->
+                <div id="ip-calculator-wrapper" class="hidden">
+                    <button id="back-to-apps" class="mb-4 bg-gray-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-600 transition-colors">&larr; Kembali ke Menu Aplikasi</button>
+                    <div class="bg-gray-100 p-8 rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold mb-6">Hitung IP Ternak</h3>
+                        <div class="grid md:grid-cols-2 gap-8 items-start">
+                            <!-- Form Input -->
+                            <div>
+                                <form id="ip-form">
+                                    <div class="mb-4">
+                                        <label for="populasi" class="block text-gray-700 font-medium mb-2">Populasi Awal (ekor)</label>
+                                        <input type="number" id="populasi" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Contoh: 1000" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="jumlah_panen" class="block text-gray-700 font-medium mb-2">Jumlah Panen (ekor)</label>
+                                        <input type="number" id="jumlah_panen" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Contoh: 950" required>
+                                    </div>
+                                     <div class="mb-4">
+                                        <label for="umur_panen" class="block text-gray-700 font-medium mb-2">Umur Panen (hari)</label>
+                                        <input type="number" id="umur_panen" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Contoh: 35" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="total_bobot_panen" class="block text-gray-700 font-medium mb-2">Total Bobot Panen (kg)</label>
+                                        <input type="number" step="0.01" id="total_bobot_panen" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Contoh: 1800.5" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="pakan" class="block text-gray-700 font-medium mb-2">Total Pakan</label>
+                                        <div class="flex items-center space-x-2">
+                                            <input type="number" step="0.01" id="pakan" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Enter Number" required>
+                                            <div class="relative">
+                                                <select id="unit-pakan" class="appearance-none w-full bg-white border border-gray-300 text-gray-700 py-3 px-4 pr-8 rounded-lg leading-tight focus:outline-none focus:bg-white focus:border-green-500">
+                                                    <option value="kg">Kg</option>
+                                                    <option value="sak">Sak</option>
+                                                </select>
+                                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="sak-kg-wrapper" class="mb-4 hidden">
+                                        <label for="sak-kg" class="block text-gray-700 font-medium mb-2">Berat per Sak (kg)</label>
+                                        <input type="number" step="0.01" id="sak-kg" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Contoh: 50">
+                                    </div>
+                                    <div class="flex space-x-4 mt-6">
+                                        <button type="submit" class="w-full bg-green-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-600">HITUNG!</button>
+                                        <button type="reset" class="w-full bg-red-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-red-600">BATALKAN</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!-- Hasil Analisa -->
+                            <div id="hasil-analisa" class="bg-white p-6 rounded-lg border border-gray-200">
+                                 <h4 class="text-xl font-bold mb-4 text-center">Hasil Analisa</h4>
+                                 <div id="loader-wrapper" class="hidden text-center">
+                                     <div class="loader"></div>
+                                     <p>Menghitung...</p>
+                                 </div>
+                                 <div id="results-content" class="hidden space-y-3">
+                                    <div class="flex justify-between items-center bg-green-600 text-white p-3 rounded-lg"><span>SKOR IP :</span><span id="result-ip" class="font-bold text-xl"></span></div>
+                                    <div class="flex justify-between items-center bg-green-100 p-3 rounded-lg"><span>Kategori :</span><span id="result-kategori" class="font-bold"></span></div>
+                                    <div class="flex justify-between items-center bg-green-100 p-3 rounded-lg"><span>Bobot Rata-rata (ABW) :</span><span id="result-abw" class="font-bold"></span></div>
+                                    <div class="flex justify-between items-center bg-green-100 p-3 rounded-lg"><span>Konversi Pakan (FCR) :</span><span id="result-fcr" class="font-bold"></span></div>
+                                    <div class="flex justify-between items-center bg-green-100 p-3 rounded-lg"><span>Pertambahan Bobot Harian (ADG) :</span><span id="result-adg" class="font-bold"></span></div>
+                                    <div class="flex justify-between items-center bg-green-100 p-3 rounded-lg"><span>Konsumsi Pakan (FI) :</span><span id="result-fi" class="font-bold"></span></div>
+                                    <div class="flex justify-between items-center bg-green-100 p-3 rounded-lg"><span>Deplesi :</span><span id="result-deplesi" class="font-bold"></span></div>
+                                    <div class="bg-green-200 p-4 rounded-lg mt-4">
+                                        <h5 class="font-bold">Kesimpulan / Interpretasi:</h5>
+                                        <p id="result-kesimpulan"></p>
+                                    </div>
+                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Bagian Ulasan -->
+        <section id="ulasan" class="py-20">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center mb-8">- Ulasan Peternak -</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center max-w-4xl mx-auto mb-12">
+                    <div class="text-center md:text-left">
+                        <p class="text-5xl font-bold text-green-600">4.89 <span class="text-yellow-400">★</span></p>
+                        <p class="text-gray-600">Total 187 reviews</p>
+                        <p class="text-green-600 font-semibold mt-1">+5 This week</p>
+                    </div>
+                    <div class="col-span-2 space-y-1">
+                        <div class="flex items-center gap-2"><span class="text-sm">5 Star</span><div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-green-500 h-2.5 rounded-full" style="width: 66%"></div></div><span class="text-sm text-gray-500">124</span></div>
+                        <div class="flex items-center gap-2"><span class="text-sm">4 Star</span><div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-green-500 h-2.5 rounded-full" style="width: 21%"></div></div><span class="text-sm text-gray-500">40</span></div>
+                        <div class="flex items-center gap-2"><span class="text-sm">3 Star</span><div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-green-500 h-2.5 rounded-full" style="width: 6%"></div></div><span class="text-sm text-gray-500">12</span></div>
+                        <div class="flex items-center gap-2"><span class="text-sm">2 Star</span><div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-green-500 h-2.5 rounded-full" style="width: 4%"></div></div><span class="text-sm text-gray-500">7</span></div>
+                        <div class="flex items-center gap-2"><span class="text-sm">1 Star</span><div class="w-full bg-gray-200 rounded-full h-2.5"><div class="bg-green-500 h-2.5 rounded-full" style="width: 1%"></div></div><span class="text-sm text-gray-500">2</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroller pt-12">
+                <div class="scroller-inner"></div>
+            </div>
+        </section>
+
+        <!-- Bagian Hubungi -->
+        <section id="hubungi" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold mb-4">CONTACT US</h2>
+                <div class="max-w-md mx-auto space-y-4">
+                     <p class="text-lg">0851-7985-2558</p>
+                     <p class="text-lg">hub.halloabdi@gmail.com</p>
+                     <p class="text-lg">lynk.id/halloabdi</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-yellow-400 text-gray-800 py-6">
+        <div class="container mx-auto px-6 text-center">
+            <p class="font-bold">Powered By: Muhammad Abdi | Made with ❤️</p>
+            <p>Telah Di Daftarkan Hak Cipta Sejak 2025, Meniru dan Membajaknya adalah Tindak Kejahatan!</p>
+        </div>
+    </footer>
+
+    <script>
+        // Custom modal for alerts
+        function createModal(message) {
+            const modalOverlay = document.createElement('div');
+            modalOverlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50';
+            
+            const modalContent = document.createElement('div');
+            modalContent.className = 'bg-white p-8 rounded-lg shadow-lg text-center max-w-sm mx-auto';
+            
+            const modalMessage = document.createElement('p');
+            modalMessage.textContent = message;
+            modalMessage.className = 'mb-4 text-lg';
+            
+            const closeButton = document.createElement('button');
+            closeButton.textContent = 'Tutup';
+            closeButton.className = 'bg-red-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-red-600';
+            
+            modalContent.appendChild(modalMessage);
+            modalContent.appendChild(closeButton);
+            modalOverlay.appendChild(modalContent);
+            document.body.appendChild(modalOverlay);
+            
+            closeButton.addEventListener('click', () => {
+                document.body.removeChild(modalOverlay);
+            });
+             modalOverlay.addEventListener('click', (e) => {
+                if (e.target === modalOverlay) {
+                     document.body.removeChild(modalOverlay);
+                }
+            });
+        }
+
+        // Script untuk menu mobile
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Script untuk navigasi Aplikasi
+        const showIpCalculatorBtn = document.getElementById('show-ip-calculator');
+        const ipCalculatorWrapper = document.getElementById('ip-calculator-wrapper');
+        const appIcons = document.getElementById('app-icons');
+        const backToAppsBtn = document.getElementById('back-to-apps');
+
+        showIpCalculatorBtn.addEventListener('click', () => {
+            appIcons.classList.add('hidden');
+            ipCalculatorWrapper.classList.remove('hidden');
+        });
+
+        backToAppsBtn.addEventListener('click', () => {
+            ipCalculatorWrapper.classList.add('hidden');
+            appIcons.classList.remove('hidden');
+            document.getElementById('ip-form').reset(); // Reset form saat kembali
+            resultsContent.classList.add('hidden');
+        });
+
+
+        // Script untuk kalkulator IP
+        const unitPakanSelect = document.getElementById('unit-pakan');
+        const sakKgWrapper = document.getElementById('sak-kg-wrapper');
+        const ipForm = document.getElementById('ip-form');
+        const loaderWrapper = document.getElementById('loader-wrapper');
+        const resultsContent = document.getElementById('results-content');
+
+        unitPakanSelect.addEventListener('change', () => {
+            if (unitPakanSelect.value === 'sak') {
+                sakKgWrapper.classList.remove('hidden');
+                document.getElementById('sak-kg').required = true;
+            } else {
+                sakKgWrapper.classList.add('hidden');
+                document.getElementById('sak-kg').required = false;
+            }
+        });
+
+        ipForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            resultsContent.classList.add('hidden');
+            loaderWrapper.classList.remove('hidden');
+
+            const loadingTime = Math.random() * 2000 + 3000; 
+            setTimeout(() => {
+                // 1. Mengambil data dari form
+                const populasiAwal = parseFloat(document.getElementById('populasi').value);
+                const jumlahPanen = parseFloat(document.getElementById('jumlah_panen').value);
+                const umurPanen = parseFloat(document.getElementById('umur_panen').value);
+                const totalBobotPanen = parseFloat(document.getElementById('total_bobot_panen').value);
+                let totalPakan = parseFloat(document.getElementById('pakan').value);
+
+                if (unitPakanSelect.value === 'sak') {
+                    const beratPerSak = parseFloat(document.getElementById('sak-kg').value);
+                    if (!beratPerSak || beratPerSak <= 0) {
+                        createModal("Masukkan berat per sak yang valid.");
+                        loaderWrapper.classList.add('hidden');
+                        return;
+                    }
+                    totalPakan *= beratPerSak;
+                }
+
+                // Validasi input
+                if (jumlahPanen > populasiAwal) {
+                    createModal("Jumlah panen tidak boleh melebihi populasi awal.");
+                    loaderWrapper.classList.add('hidden');
+                    return;
+                }
+
+                // 2. Melakukan Perhitungan
+                const jumlahMati = populasiAwal - jumlahPanen;
+                const deplesi = (jumlahMati / populasiAwal) * 100;
+                const abw = totalBobotPanen / jumlahPanen;
+                const fcr = totalPakan / totalBobotPanen;
+                const adg = (abw * 1000) / umurPanen; // dalam gram
+                const fi = (totalPakan * 1000) / jumlahPanen; // dalam gram
+                const ip = (((100 - deplesi) * abw) / (fcr * umurPanen)) * 100;
+
+                // 3. Menentukan Kategori dan Kesimpulan
+                let kategori, kesimpulan;
+                if (ip > 400) {
+                    kategori = "Istimewa (>400)";
+                    kesimpulan = "Kinerja produksi sangat istimewa, menunjukkan efisiensi dan produktivitas yang sangat tinggi.";
+                } else if (ip >= 351) {
+                    kategori = "Sangat Baik (351-400)";
+                    kesimpulan = "Kinerja produksi sangat baik, dan peternakan dapat mempertahankan praktik pemeliharaan yang sudah diterapkan.";
+                } else if (ip >= 326) {
+                    kategori = "Baik (326-350)";
+                    kesimpulan = "Kinerja produksi sudah cukup baik, namun masih ada potensi untuk ditingkatkan.";
+                } else if (ip >= 301) {
+                    kategori = "Cukup (301-325)";
+                    kesimpulan = "Kinerja produksi masih bisa ditingkatkan dengan perbaikan pada beberapa aspek.";
+                } else {
+                    kategori = "Kurang (<300)";
+                    kesimpulan = "Kinerja produksi kurang optimal, perlu evaluasi dan perbaikan dalam manajemen pemeliharaan.";
+                }
+
+                // 4. Menampilkan hasil
+                document.getElementById('result-ip').textContent = ip.toFixed(2);
+                document.getElementById('result-kategori').textContent = kategori;
+                document.getElementById('result-abw').textContent = abw.toFixed(2) + ' kg';
+                document.getElementById('result-fcr').textContent = fcr.toFixed(2);
+                document.getElementById('result-adg').textContent = adg.toFixed(2) + ' g/hari';
+                document.getElementById('result-fi').textContent = fi.toFixed(2) + ' g/ekor';
+                document.getElementById('result-deplesi').textContent = deplesi.toFixed(2) + ' %';
+                document.getElementById('result-kesimpulan').textContent = kesimpulan;
+
+                loaderWrapper.classList.add('hidden');
+                resultsContent.classList.remove('hidden');
+
+            }, loadingTime);
+        });
+        
+        ipForm.addEventListener('reset', () => {
+             resultsContent.classList.add('hidden');
+             loaderWrapper.classList.add('hidden');
+             sakKgWrapper.classList.add('hidden');
+        });
+
+        // Script untuk Ulasan
+        function initUlasanScroller() {
+            const reviews = [
+                { name: 'Mas A1', role: 'Staf Dinas Peternakan', text: 'Menurut Saya aplikasi ini sangat bagus karena membantu peternak.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfroviHf06NT8Ku3YRA9niyyRfLXgXIQMwhw&s' },
+                { name: 'Miss H.', role: 'Staf PT. Pencari Cinta Sejati', text: 'Menurut Saya aplikasi ini sangat bagus karena membantu peternak.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSov-etQpgMXG90BzInbdunpghXNPFHCTQCFA&s' },
+                { name: 'Sento Cahya', role: 'Staf PUPR', text: 'Menurut Saya aplikasi ini sangat bagus karena membantu peternak.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh9Ksweb38ZjZ2r45bsonRY6A0Aq8rwr8Qmg&s' },
+                { name: 'Bapak Sutrisno', role: 'Peternak Ayam Petelur, Blitar', text: 'Sangat membantu! Fitur analisis finansialnya membuat saya lebih mudah menghitung BEP dan keuntungan. Wajib dicoba!', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeNdgpQG75jF4ylDm5b7zNlOQq_Z3QTsJOCQ&s' },
+                { name: 'Ibu Rina Wulandari', role: 'Dosen Fakultas Peternakan', text: 'Sebagai akademisi, saya melihat SATU TERNAK sebagai alat edukasi yang luar biasa. Perhitungan FCR dan IP-nya akurat.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfroviHf06NT8Ku3YRA9niyyRfLXgXIQMwhw&s' },
+                { name: 'Agung Prasetyo', role: 'Mahasiswa Agribisnis', text: 'Aplikasi ini jadi andalan saya untuk tugas kuliah dan riset. Datanya lengkap dan antarmukanya mudah dipahami. Keren!', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSov-etQpgMXG90BzInbdunpghXNPFHCTQCFA&s' },
+                { name: 'CV. Mitra Jaya Farm', role: 'Perusahaan Kemitraan Unggas', text: 'Memudahkan kami dalam memonitor performa kandang mitra. Fitur deplesi dan ADG sangat informatif.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh9Ksweb38ZjZ2r45bsonRY6A0Aq8rwr8Qmg&s' },
+                { name: 'Drh. Anisa Putri', role: 'Dokter Hewan & Konsultan', text: 'Platform yang prospektif. Saya sering merekomendasikan ini ke klien untuk mencatat data kesehatan ternak.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeNdgpQG75jF4ylDm5b7zNlOQq_Z3QTsJOCQ&s' },
+            ];
+
+            const scrollerInner = document.querySelector('.scroller-inner');
+            if (!scrollerInner) return;
+            scrollerInner.innerHTML = ''; 
+            const allReviews = [...reviews, ...reviews];
+
+            allReviews.forEach(review => {
+                const reviewCard = document.createElement('div');
+                reviewCard.className = 'relative bg-green-600 text-white pt-12 p-5 rounded-xl shadow-lg w-80 flex-shrink-0 text-left';
+                reviewCard.innerHTML = `
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full border-4 border-white shadow-md bg-gray-300 overflow-hidden">
+                        <img src="${review.img}" alt="${review.name}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="text-center mt-2">
+                        <p class="font-bold text-lg">${review.name}</p>
+                        <p class="text-sm opacity-80">${review.role}</p>
+                    </div>
+                    <div class="flex justify-center my-2 text-yellow-400">${'★'.repeat(5)}</div>
+                    <p class="text-sm">${review.text}</p>
+                `;
+                scrollerInner.appendChild(reviewCard);
+            });
+        }
+        
+        // Panggil fungsi saat halaman dimuat
+        document.addEventListener('DOMContentLoaded', initUlasanScroller);
+
+    </script>
+</body>
+</html>
