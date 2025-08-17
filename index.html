@@ -65,6 +65,16 @@
             0%,5%  {rotate:  0deg}
             95%,to {rotate:-60deg}
         }
+        
+        /* Menyembunyikan panah di input number */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+          -webkit-appearance: none; 
+          margin: 0; 
+        }
+        input[type=number] {
+          -moz-appearance: textfield;
+        }
     </style>
 </head>
 <body class="bg-white text-gray-800">
@@ -178,7 +188,7 @@
                         <h4 class="text-md font-bold">[UJI COBA] Ransum Ternak</h4>
                     </div>
                     <!-- Finansial Ternak -->
-                     <div class="bg-green-500 text-white p-6 rounded-lg shadow-lg text-center flex flex-col justify-center items-center aspect-square">
+                     <div id="show-financial-calculator" class="bg-green-500 text-white p-6 rounded-lg shadow-lg text-center flex flex-col justify-center items-center aspect-square cursor-pointer hover:bg-green-600 transition-colors">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg>
                         <h4 class="text-md font-bold">[UJI COBA] Finansial Ternak</h4>
                     </div>
@@ -199,7 +209,7 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" /><path fill-rule="evenodd" d="M10 9a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1H8a1 1 0 110-2h1V10a1 1 0 011-1z" clip-rule="evenodd" /></svg>
                         <h4 class="text-md font-bold">[UJI COBA] DokTanya</h4>
                     </div>
-                                        <!-- Cari Rumah Sakit -->
+                    <!-- Cari Rumah Sakit -->
                     <div class="bg-green-500 text-white p-6 rounded-lg shadow-lg text-center flex flex-col justify-center items-center aspect-square">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /><path d="M10 9a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1H8a1 1 0 110-2h1V10a1 1 0 011-1z" /></svg>
                         <h4 class="text-md font-bold">[UJI COBA] Cari Rumah Sakit</h4>
@@ -221,8 +231,8 @@
                 </div>
 
                 <!-- Wrapper Kalkulator IP Ternak (hidden) -->
-                <div id="ip-calculator-wrapper" class="hidden">
-                    <button id="back-to-apps" class="mb-4 bg-gray-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-600 transition-colors">&larr; Kembali ke Menu Aplikasi</button>
+                <div id="ip-calculator-wrapper" class="hidden mt-12">
+                    <button id="back-to-apps-from-ip" class="mb-4 bg-gray-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-600 transition-colors">&larr; Kembali ke Menu Aplikasi</button>
                     <div class="bg-gray-100 p-8 rounded-lg shadow-lg">
                         <h3 class="text-2xl font-bold mb-6">Hitung IP Ternak</h3>
                         <div class="grid md:grid-cols-2 gap-8 items-start">
@@ -328,6 +338,117 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Wrapper Kalkulator Finansial (hidden) -->
+                <div id="financial-calculator-wrapper" class="hidden mt-12">
+                    <button id="back-to-apps-from-financial" class="mb-4 bg-gray-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-600 transition-colors">&larr; Kembali ke Menu Aplikasi</button>
+                    <div class="bg-gray-100 p-8 rounded-lg shadow-lg">
+                        <h3 class="text-2xl font-bold mb-6">Hitung Finansial Ternak</h3>
+                        
+                        <!-- Tabel Input Biaya -->
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full bg-white border border-gray-300">
+                                <thead class="bg-gray-200">
+                                    <tr>
+                                        <th class="py-2 px-3 border-b text-left text-sm font-semibold text-gray-600">Rincian Produk</th>
+                                        <th class="py-2 px-3 border-b text-left text-sm font-semibold text-gray-600">Jenis Produk</th>
+                                        <th class="py-2 px-3 border-b text-left text-sm font-semibold text-gray-600">Kategori Biaya</th>
+                                        <th class="py-2 px-3 border-b text-left text-sm font-semibold text-gray-600">Jumlah</th>
+                                        <th class="py-2 px-3 border-b text-left text-sm font-semibold text-gray-600">Harga Satuan (Rp)</th>
+                                        <th class="py-2 px-3 border-b text-left text-sm font-semibold text-gray-600">Harga Total (Rp)</th>
+                                        <th class="py-2 px-3 border-b text-left text-sm font-semibold text-gray-600 col-biaya-tetap hidden">Masa Pakai (Hari)</th>
+                                        <th class="py-2 px-3 border-b text-left text-sm font-semibold text-gray-600 col-biaya-tetap hidden">Persentase Penurunan (%)</th>
+                                        <th class="py-2 px-3 border-b text-left text-sm font-semibold text-gray-600 col-biaya-tetap hidden">Nilai Penyusutan (Rp/Hari)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="financial-table-body">
+                                    <!-- Baris akan ditambahkan secara dinamis -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="flex gap-4 mt-4">
+                            <button id="add-financial-row" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-blue-600">+ TAMBAHKAN KOLOM</button>
+                            <button id="remove-financial-row" class="bg-red-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-600">- HAPUS KOLOM SEBELUMNYA</button>
+                        </div>
+
+                        <div class="mt-8 border-t pt-6">
+                             <button id="calculate-financial" class="w-full md:w-auto flex items-center justify-center gap-2 bg-green-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-600 transition-colors">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                  <path fill-rule="evenodd" d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 00-1 1v2a1 1 0 001 1h6a1 1 0 001-1V5a1 1 0 00-1-1H7zM6 12a1 1 0 011-1h2a1 1 0 110 2H7a1 1 0 01-1-1zm5 1a1 1 0 100-2h.01a1 1 0 100 2H11zm-5 3a1 1 0 011-1h2a1 1 0 110 2H7a1 1 0 01-1-1zm5 1a1 1 0 100-2h.01a1 1 0 100 2H11z" clip-rule="evenodd" />
+                                </svg>
+                                HITUNGLAH!
+                            </button>
+                        </div>
+                        
+                        <!-- Hasil Perhitungan Awal -->
+                        <div id="financial-loader-1" class="hidden text-center mt-6">
+                            <div class="loader"></div>
+                            <p>Menghitung...</p>
+                        </div>
+                        <div id="initial-financial-results" class="hidden mt-6 p-6 bg-white rounded-lg border border-gray-200">
+                            <h4 class="text-xl font-bold mb-4 text-center">Hasil Perhitungan Biaya & BEP</h4>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center bg-blue-100 p-3 rounded-lg">
+                                    <span>Total Seluruh Biaya :</span>
+                                    <span id="total-biaya" class="font-bold text-lg"></span>
+                                </div>
+                                <div class="mt-4 grid md:grid-cols-2 gap-4">
+                                     <div>
+                                        <label for="jumlah-unit-produksi" class="block text-gray-700 font-medium mb-2">Jumlah Unit Produksi</label>
+                                        <input type="number" id="jumlah-unit-produksi" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="Contoh: 1000">
+                                    </div>
+                                    <div>
+                                        <label for="harga-jual-unit" class="block text-gray-700 font-medium mb-2">Harga Jual per Unit (Rp)</label>
+                                        <input type="number" id="harga-jual-unit" class="w-full p-3 border border-gray-300 rounded-lg" placeholder="Contoh: 25000">
+                                    </div>
+                                </div>
+                                <div class="flex justify-between items-center bg-green-600 text-white p-3 rounded-lg mt-4">
+                                    <span>BEP (Unit) :</span>
+                                    <span id="bep-unit" class="font-bold text-xl"></span>
+                                </div>
+                                <p class="text-sm text-gray-600 mt-2">BEP (Break-Even Point) adalah jumlah unit yang harus dijual agar total pendapatan sama dengan total biaya (tidak untung, tidak rugi).</p>
+                            </div>
+                            
+                            <!-- Analisa Lanjutan -->
+                            <div class="mt-6 border-t pt-6">
+                                <h4 class="text-lg font-bold mb-4">Analisa Keuntungan</h4>
+                                <div class="grid md:grid-cols-2 gap-4 items-end">
+                                    <div>
+                                        <label for="ambil-keuntungan" class="block text-gray-700 font-medium mb-2">Ambil Keuntungan per Produk</label>
+                                        <div class="flex">
+                                            <input type="number" id="ambil-keuntungan" class="w-full p-3 border border-gray-300 rounded-l-lg" placeholder="Contoh: 20 atau 5000">
+                                            <select id="tipe-keuntungan" class="border border-l-0 border-gray-300 rounded-r-lg px-3 bg-gray-50">
+                                                <option value="persen">%</option>
+                                                <option value="rupiah">Rp</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <button id="analyze-all" class="w-full md:w-auto bg-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:bg-purple-700 transition-colors">ANALISA SELURUHNYA</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hasil Analisa Akhir -->
+                        <div id="financial-loader-2" class="hidden text-center mt-6">
+                            <div class="loader"></div>
+                            <p>Menganalisa...</p>
+                        </div>
+                        <div id="final-analysis-results" class="hidden mt-6 p-6 bg-white rounded-lg border-2 border-purple-300">
+                             <h4 class="text-xl font-bold mb-4 text-center">Hasil Analisa Finansial Lengkap</h4>
+                             <div class="space-y-3">
+                                <div class="flex justify-between items-center bg-purple-100 p-3 rounded-lg"><span>Target Unit Terjual (BEP + Keuntungan) :</span><span id="target-unit" class="font-bold"></span></div>
+                                <div class="flex justify-between items-center bg-purple-100 p-3 rounded-lg"><span>Total Penerimaan (Pendapatan Kotor) :</span><span id="total-penerimaan" class="font-bold"></span></div>
+                                <div class="flex justify-between items-center bg-purple-100 p-3 rounded-lg"><span>R/C Ratio :</span><span id="rc-ratio" class="font-bold"></span></div>
+                                <div class="flex justify-between items-center bg-purple-100 p-3 rounded-lg"><span>B/C Ratio :</span><span id="bc-ratio" class="font-bold"></span></div>
+                                <div class="flex justify-between items-center bg-purple-100 p-3 rounded-lg"><span>Payback Period (PP) :</span><span id="payback-period" class="font-bold"></span></div>
+                                <div class="flex justify-between items-center bg-purple-600 text-white p-3 rounded-lg"><span>Return on Investment (ROI) :</span><span id="roi" class="font-bold text-xl"></span></div>
+                             </div>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
         </section>
         
@@ -415,26 +536,48 @@
             mobileMenu.classList.toggle('hidden');
         });
 
-        // Script untuk navigasi Aplikasi
+        // =================================================================
+        // === SCRIPT NAVIGASI APLIKASI UTAMA ===
+        // =================================================================
+        const appIcons = document.getElementById('app-icons');
+        
+        // --- Kalkulator IP ---
         const showIpCalculatorBtn = document.getElementById('show-ip-calculator');
         const ipCalculatorWrapper = document.getElementById('ip-calculator-wrapper');
-        const appIcons = document.getElementById('app-icons');
-        const backToAppsBtn = document.getElementById('back-to-apps');
-
+        const backToAppsBtnIp = document.getElementById('back-to-apps-from-ip');
+        
         showIpCalculatorBtn.addEventListener('click', () => {
             appIcons.classList.add('hidden');
             ipCalculatorWrapper.classList.remove('hidden');
         });
 
-        backToAppsBtn.addEventListener('click', () => {
+        backToAppsBtnIp.addEventListener('click', () => {
             ipCalculatorWrapper.classList.add('hidden');
             appIcons.classList.remove('hidden');
-            document.getElementById('ip-form').reset(); // Reset form saat kembali
-            resultsContent.classList.add('hidden');
+            document.getElementById('ip-form').reset();
+            document.getElementById('results-content').classList.add('hidden');
+        });
+
+        // --- Kalkulator Finansial ---
+        const showFinancialCalculatorBtn = document.getElementById('show-financial-calculator');
+        const financialCalculatorWrapper = document.getElementById('financial-calculator-wrapper');
+        const backToAppsBtnFinancial = document.getElementById('back-to-apps-from-financial');
+
+        showFinancialCalculatorBtn.addEventListener('click', () => {
+            appIcons.classList.add('hidden');
+            financialCalculatorWrapper.classList.remove('hidden');
+        });
+
+        backToAppsBtnFinancial.addEventListener('click', () => {
+            financialCalculatorWrapper.classList.add('hidden');
+            appIcons.classList.remove('hidden');
+            // Reset form finansial jika perlu
         });
 
 
-        // Script untuk kalkulator IP
+        // =================================================================
+        // === SCRIPT UNTUK KALKULATOR IP ===
+        // =================================================================
         const unitPakanSelect = document.getElementById('unit-pakan');
         const sakKgWrapper = document.getElementById('sak-kg-wrapper');
         const ipForm = document.getElementById('ip-form');
@@ -467,11 +610,6 @@
 
         tipeSatuanRadios.forEach(radio => {
             radio.addEventListener('change', () => {
-                if (radio.value === 'sampling') {
-                    samplingOptionsWrapper.classList.add('hidden');
-                } else {
-                    samplingOptionsWrapper.classList.add('hidden');
-                }
                 generateBobotColumns();
             });
         });
@@ -487,15 +625,9 @@
             let count = 0;
 
             if (tipeSatuan === 'sampling') {
-                samplingOptionsWrapper.classList.add('hidden');
-                tambahBobotBtn.classList.remove('hidden');
-                hapusBobotBtn.classList.remove('hidden');
                 helperText.textContent = `Masukkan data bobot sampling per ekor.`;
                 count = 5; // Start with 5 columns for sampling
             } else { // Hitung Semua
-                samplingOptionsWrapper.classList.add('hidden');
-                tambahBobotBtn.classList.remove('hidden');
-                hapusBobotBtn.classList.remove('hidden');
                 count = jumlahPanen;
                 helperText.textContent = `Input sesuai jumlah ekor panen (${count} data).`;
             }
@@ -510,7 +642,7 @@
              const tipeSatuan = document.querySelector('input[name="tipe_satuan"]:checked').value;
              const jumlahPanen = parseInt(document.getElementById('jumlah_panen').value) || 0;
 
-             if (tipeSatuan === 'semua' && currentInputs >= jumlahPanen) {
+             if (tipeSatuan === 'semua' && jumlahPanen > 0 && currentInputs >= jumlahPanen) {
                  createModal(`Tidak bisa menambah lebih dari jumlah panen (${jumlahPanen} ekor).`);
                  return;
              }
@@ -530,7 +662,6 @@
             }
         }
 
-
         ipForm.addEventListener('submit', (e) => {
             e.preventDefault();
             
@@ -539,13 +670,11 @@
 
             const loadingTime = Math.random() * 2000 + 3000; 
             setTimeout(() => {
-                // 1. Mengambil data dari form
                 const populasiAwal = parseFloat(document.getElementById('populasi').value);
                 const jumlahPanen = parseFloat(document.getElementById('jumlah_panen').value);
                 const umurPanen = parseFloat(document.getElementById('umur_panen').value);
                 let totalPakan = parseFloat(document.getElementById('pakan').value);
                 let totalBobotPanen;
-
                 const metodeBobot = document.querySelector('input[name="metode_bobot"]:checked').value;
 
                 if (metodeBobot === 'total') {
@@ -566,7 +695,7 @@
                     if (tipeSatuan === 'sampling') {
                         const avgBobotSample = totalBobotSample / bobotArray.length;
                         totalBobotPanen = avgBobotSample * jumlahPanen;
-                    } else { // Hitung Semua
+                    } else {
                          if (bobotArray.length !== jumlahPanen) {
                             createModal(`Jumlah data bobot (${bobotArray.length}) tidak sesuai dengan jumlah panen (${jumlahPanen}).`);
                             loaderWrapper.classList.add('hidden');
@@ -586,23 +715,20 @@
                     totalPakan *= beratPerSak;
                 }
 
-                // Validasi input
                 if (jumlahPanen > populasiAwal) {
                     createModal("Jumlah panen tidak boleh melebihi populasi awal.");
                     loaderWrapper.classList.add('hidden');
                     return;
                 }
 
-                // 2. Melakukan Perhitungan
                 const jumlahMati = populasiAwal - jumlahPanen;
                 const deplesi = (jumlahMati / populasiAwal) * 100;
                 const abw = totalBobotPanen / jumlahPanen;
                 const fcr = totalPakan / totalBobotPanen;
-                const adg = (abw * 1000) / umurPanen; // dalam gram
-                const fi = (totalPakan * 1000) / jumlahPanen; // dalam gram
+                const adg = (abw * 1000) / umurPanen;
+                const fi = (totalPakan * 1000) / jumlahPanen;
                 const ip = (((100 - deplesi) * abw) / (fcr * umurPanen)) * 100;
 
-                // 3. Menentukan Kategori dan Kesimpulan
                 let kategori, kesimpulan;
                 if (ip > 400) {
                     kategori = "Istimewa (>400)";
@@ -621,7 +747,6 @@
                     kesimpulan = "Kinerja produksi kurang optimal, perlu evaluasi dan perbaikan dalam manajemen pemeliharaan.";
                 }
 
-                // 4. Menampilkan hasil
                 document.getElementById('result-ip').textContent = ip.toFixed(2);
                 document.getElementById('result-kategori').textContent = kategori;
                 document.getElementById('result-abw').textContent = abw.toFixed(2) + ' kg';
@@ -646,7 +771,261 @@
              bobotKolomContainer.innerHTML = '';
         });
 
-        // Script untuk Ulasan
+        // =================================================================
+        // === SCRIPT UNTUK KALKULATOR FINANSIAL ===
+        // =================================================================
+        const financialTableBody = document.getElementById('financial-table-body');
+        const addFinancialRowBtn = document.getElementById('add-financial-row');
+        const removeFinancialRowBtn = document.getElementById('remove-financial-row');
+        const calculateFinancialBtn = document.getElementById('calculate-financial');
+        const financialLoader1 = document.getElementById('financial-loader-1');
+        const initialFinancialResults = document.getElementById('initial-financial-results');
+        const analyzeAllBtn = document.getElementById('analyze-all');
+        const financialLoader2 = document.getElementById('financial-loader-2');
+        const finalAnalysisResults = document.getElementById('final-analysis-results');
+
+        const residualValues = {
+            'Stainless Steel': 0.005, // 0.5%
+            'Kayu': 0.5, // 50%
+            'Aluminium': 0.003, // 0.3%
+            'Seng': 0.01, // 1%
+            'Batu Bata Merah': 0.006, // 0.6%
+            'Batu Kapur': 0.004, // 0.4%
+            'Beton +': 0.0065, // 0.65%
+            'Manusia': 0 // 0%
+        };
+
+        function createFinancialRow() {
+            const row = document.createElement('tr');
+            row.className = 'financial-row';
+            row.innerHTML = `
+                <td class="border-b border-gray-200 p-2"><input type="text" class="w-full p-2 border rounded" placeholder="Nama Produk..."></td>
+                <td class="border-b border-gray-200 p-2">
+                    <select class="w-full p-2 border rounded jenis-produk">
+                        <option value="">Pilih Jenis</option>
+                        <option>Stainless Steel</option>
+                        <option>Kayu</option>
+                        <option>Aluminium</option>
+                        <option>Seng</option>
+                        <option>Batu Bata Merah</option>
+                        <option>Batu Kapur</option>
+                        <option>Beton +</option>
+                        <option>Manusia</option>
+                        <option>Lainnya</option>
+                    </select>
+                </td>
+                <td class="border-b border-gray-200 p-2">
+                    <select class="w-full p-2 border rounded kategori-biaya">
+                        <option value="Biaya Variabel">Biaya Variabel</option>
+                        <option value="Biaya Tetap">Biaya Tetap</option>
+                        <option value="Biaya Overhead">Biaya Overhead</option>
+                    </select>
+                </td>
+                <td class="border-b border-gray-200 p-2"><input type="number" class="w-20 p-2 border rounded jumlah" placeholder="0"></td>
+                <td class="border-b border-gray-200 p-2"><input type="number" class="w-32 p-2 border rounded harga-satuan" placeholder="0"></td>
+                <td class="border-b border-gray-200 p-2"><input type="number" class="w-32 p-2 border rounded bg-gray-100 harga-total" readonly></td>
+                <td class="border-b border-gray-200 p-2 col-biaya-tetap hidden"><input type="number" class="w-24 p-2 border rounded masa-pakai" placeholder="0"></td>
+                <td class="border-b border-gray-200 p-2 col-biaya-tetap hidden"><input type="number" class="w-24 p-2 border rounded persentase-penurunan" placeholder="0"></td>
+                <td class="border-b border-gray-200 p-2 col-biaya-tetap hidden"><input type="number" class="w-32 p-2 border rounded bg-gray-100 nilai-penyusutan" readonly></td>
+            `;
+            financialTableBody.appendChild(row);
+            row.querySelector('.kategori-biaya').addEventListener('change', toggleFixedCostColumns);
+            row.querySelector('.jenis-produk').addEventListener('change', autoFillDepreciation);
+            row.addEventListener('input', updateRowCalculations);
+        }
+
+        function toggleFixedCostColumns(event) {
+            const row = event.target.closest('tr');
+            const fixedCostCols = row.querySelectorAll('.col-biaya-tetap');
+            const isFixedCost = event.target.value === 'Biaya Tetap';
+            
+            document.querySelectorAll('thead .col-biaya-tetap').forEach(th => th.classList.toggle('hidden', !isFixedCost));
+            fixedCostCols.forEach(col => col.classList.toggle('hidden', !isFixedCost));
+        }
+        
+        function autoFillDepreciation(event) {
+            const row = event.target.closest('tr');
+            const jenisProduk = event.target.value;
+            const persentaseInput = row.querySelector('.persentase-penurunan');
+            if (residualValues.hasOwnProperty(jenisProduk)) {
+                const residual = residualValues[jenisProduk];
+                const depreciationPercent = (1 - residual) * 100;
+                persentaseInput.value = depreciationPercent.toFixed(2);
+            } else {
+                persentaseInput.value = '';
+            }
+            updateRowCalculations({ target: persentaseInput });
+        }
+
+        function updateRowCalculations(event) {
+            const row = event.target.closest('tr');
+            const jumlah = parseFloat(row.querySelector('.jumlah').value) || 0;
+            const hargaSatuan = parseFloat(row.querySelector('.harga-satuan').value) || 0;
+            const hargaTotalInput = row.querySelector('.harga-total');
+            
+            const hargaTotal = jumlah * hargaSatuan;
+            hargaTotalInput.value = hargaTotal.toFixed(0);
+
+            if (row.querySelector('.kategori-biaya').value === 'Biaya Tetap') {
+                const masaPakai = parseFloat(row.querySelector('.masa-pakai').value) || 0;
+                const persentasePenurunan = parseFloat(row.querySelector('.persentase-penurunan').value) || 0;
+                const nilaiPenyusutanInput = row.querySelector('.nilai-penyusutan');
+                
+                if (masaPakai > 0) {
+                    // Rumus: (Nilai Awal * Persentase Penurunan) / Masa Pakai
+                    const totalDepreciation = hargaTotal * (persentasePenurunan / 100);
+                    const dailyDepreciation = totalDepreciation / masaPakai;
+                    nilaiPenyusutanInput.value = dailyDepreciation.toFixed(2);
+                } else {
+                    nilaiPenyusutanInput.value = 0;
+                }
+            }
+        }
+
+        addFinancialRowBtn.addEventListener('click', createFinancialRow);
+        removeFinancialRowBtn.addEventListener('click', () => {
+            const rows = financialTableBody.querySelectorAll('.financial-row');
+            if (rows.length > 0) {
+                financialTableBody.removeChild(rows[rows.length - 1]);
+            }
+        });
+
+        calculateFinancialBtn.addEventListener('click', () => {
+            initialFinancialResults.classList.add('hidden');
+            finalAnalysisResults.classList.add('hidden');
+            financialLoader1.classList.remove('hidden');
+
+            setTimeout(() => {
+                let totalBiayaTetap = 0;
+                let totalBiayaVariabel = 0;
+                let totalBiayaOverhead = 0;
+                let totalNilaiPenyusutan = 0;
+
+                document.querySelectorAll('.financial-row').forEach(row => {
+                    const kategori = row.querySelector('.kategori-biaya').value;
+                    const hargaTotal = parseFloat(row.querySelector('.harga-total').value) || 0;
+                    
+                    if (kategori === 'Biaya Tetap') {
+                        totalBiayaTetap += hargaTotal;
+                        const penyusutan = parseFloat(row.querySelector('.nilai-penyusutan').value) || 0;
+                        const masaPakai = parseFloat(row.querySelector('.masa-pakai').value) || 0;
+                        // Asumsi penyusutan dihitung selama umur panen (misal 35 hari) untuk perhitungan biaya total siklus ini
+                        // Jika tidak, kita bisa anggap penyusutan per hari dikali periode
+                        // Untuk simplicity, kita tambahkan total penyusutan per hari.
+                        totalNilaiPenyusutan += penyusutan;
+                    } else if (kategori === 'Biaya Variabel') {
+                        totalBiayaVariabel += hargaTotal;
+                    } else if (kategori === 'Biaya Overhead') {
+                        totalBiayaOverhead += hargaTotal;
+                    }
+                });
+
+                // Total biaya adalah total semua biaya input. Penyusutan adalah biaya non-tunai tapi tetap cost.
+                // Untuk BEP, biaya penyusutan dianggap biaya tetap.
+                const totalSeluruhBiaya = totalBiayaTetap + totalBiayaVariabel + totalBiayaOverhead;
+                document.getElementById('total-biaya').textContent = `Rp ${totalSeluruhBiaya.toLocaleString('id-ID')}`;
+                
+                // Hitung BEP saat input unit dan harga jual diubah
+                const calculateBEP = () => {
+                    const jumlahUnit = parseFloat(document.getElementById('jumlah-unit-produksi').value) || 0;
+                    const hargaJual = parseFloat(document.getElementById('harga-jual-unit').value) || 0;
+
+                    if (jumlahUnit > 0 && hargaJual > 0) {
+                        const biayaVariabelPerUnit = totalBiayaVariabel / jumlahUnit;
+                        const totalBiayaTetapUntukBEP = totalBiayaTetap + totalBiayaOverhead + (totalNilaiPenyusutan * 35); // Asumsi siklus 35 hari
+                        
+                        if (hargaJual > biayaVariabelPerUnit) {
+                            const bep = totalBiayaTetapUntukBEP / (hargaJual - biayaVariabelPerUnit);
+                            document.getElementById('bep-unit').textContent = `${Math.ceil(bep).toLocaleString('id-ID')} Unit`;
+                        } else {
+                            document.getElementById('bep-unit').textContent = 'Harga jual <= biaya variabel';
+                        }
+                    } else {
+                        document.getElementById('bep-unit').textContent = '0 Unit';
+                    }
+                };
+
+                document.getElementById('jumlah-unit-produksi').addEventListener('input', calculateBEP);
+                document.getElementById('harga-jual-unit').addEventListener('input', calculateBEP);
+                
+                financialLoader1.classList.add('hidden');
+                initialFinancialResults.classList.remove('hidden');
+                calculateBEP(); // Panggil sekali untuk inisialisasi
+            }, Math.random() * 2000 + 3000);
+        });
+
+        analyzeAllBtn.addEventListener('click', () => {
+            finalAnalysisResults.classList.add('hidden');
+            financialLoader2.classList.remove('hidden');
+
+            setTimeout(() => {
+                // Ambil data dari perhitungan sebelumnya
+                const totalSeluruhBiaya = parseFloat(document.getElementById('total-biaya').textContent.replace(/[^0-9]/g, ''));
+                const jumlahUnit = parseFloat(document.getElementById('jumlah-unit-produksi').value) || 0;
+                let hargaJual = parseFloat(document.getElementById('harga-jual-unit').value) || 0;
+                const keuntunganValue = parseFloat(document.getElementById('ambil-keuntungan').value) || 0;
+                const tipeKeuntungan = document.getElementById('tipe-keuntungan').value;
+                
+                if (jumlahUnit === 0 || hargaJual === 0) {
+                    createModal("Jumlah unit produksi dan harga jual harus diisi untuk analisa lengkap.");
+                    financialLoader2.classList.add('hidden');
+                    return;
+                }
+                
+                // Hitung ulang biaya
+                let totalBiayaTetap = 0, totalBiayaVariabel = 0, totalBiayaOverhead = 0, totalNilaiPenyusutan = 0;
+                document.querySelectorAll('.financial-row').forEach(row => {
+                    const kategori = row.querySelector('.kategori-biaya').value;
+                    const hargaTotal = parseFloat(row.querySelector('.harga-total').value) || 0;
+                    if (kategori === 'Biaya Tetap') {
+                        totalBiayaTetap += hargaTotal;
+                        totalNilaiPenyusutan += parseFloat(row.querySelector('.nilai-penyusutan').value) || 0;
+                    } else if (kategori === 'Biaya Variabel') totalBiayaVariabel += hargaTotal;
+                    else if (kategori === 'Biaya Overhead') totalBiayaOverhead += hargaTotal;
+                });
+                const totalBiayaTetapUntukBEP = totalBiayaTetap + totalBiayaOverhead + (totalNilaiPenyusutan * 35); // Asumsi siklus 35 hari
+                const biayaVariabelPerUnit = totalBiayaVariabel / jumlahUnit;
+
+                // Tambahkan keuntungan ke harga jual jika ada
+                let targetLaba = 0;
+                if (keuntunganValue > 0) {
+                    if (tipeKeuntungan === 'persen') {
+                        targetLaba = (hargaJual * (keuntunganValue / 100)) * jumlahUnit;
+                    } else { // rupiah
+                        targetLaba = keuntunganValue * jumlahUnit;
+                    }
+                }
+
+                const unitTarget = (totalBiayaTetapUntukBEP + targetLaba) / (hargaJual - biayaVariabelPerUnit);
+                const totalPenerimaan = hargaJual * jumlahUnit;
+                const labaBersih = totalPenerimaan - totalSeluruhBiaya;
+
+                const rcRatio = totalPenerimaan / totalSeluruhBiaya;
+                const bcRatio = labaBersih / totalSeluruhBiaya;
+                // Payback Period (PP) dalam siklus produksi
+                const paybackPeriod = (labaBersih > 0) ? totalSeluruhBiaya / labaBersih : Infinity;
+                const roi = (labaBersih / totalSeluruhBiaya) * 100;
+
+                document.getElementById('target-unit').textContent = `${Math.ceil(unitTarget).toLocaleString('id-ID')} Unit`;
+                document.getElementById('total-penerimaan').textContent = `Rp ${totalPenerimaan.toLocaleString('id-ID')}`;
+                document.getElementById('rc-ratio').textContent = rcRatio.toFixed(2);
+                document.getElementById('bc-ratio').textContent = bcRatio.toFixed(2);
+                document.getElementById('payback-period').textContent = paybackPeriod === Infinity ? 'Tidak Tercapai' : `${paybackPeriod.toFixed(2)} siklus`;
+                document.getElementById('roi').textContent = `${roi.toFixed(2)} %`;
+
+                financialLoader2.classList.add('hidden');
+                finalAnalysisResults.classList.remove('hidden');
+
+            }, Math.random() * 2000 + 3000);
+        });
+
+        // Inisialisasi baris pertama kalkulator finansial
+        createFinancialRow();
+
+
+        // =================================================================
+        // === SCRIPT UNTUK ULASAN ===
+        // =================================================================
         function initUlasanScroller() {
             const reviews = [
                 { name: 'Mas A1', role: 'Staf Dinas Peternakan', text: 'Menurut Saya aplikasi ini sangat bagus karena membantu peternak.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfroviHf06NT8Ku3YRA9niyyRfLXgXIQMwhw&s' },
@@ -669,7 +1048,7 @@
                 reviewCard.className = 'relative bg-green-600 text-white pt-12 p-5 rounded-xl shadow-lg w-80 flex-shrink-0 text-left';
                 reviewCard.innerHTML = `
                     <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full border-4 border-white shadow-md bg-gray-300">
-                        <img src="${review.img}" alt="${review.name}" class="w-full h-full object-cover rounded-full">
+                        <img src="${review.img}" alt="${review.name}" class="w-full h-full object-cover rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/80x80/E2E8F0/4A5568?text=Foto';">
                     </div>
                     <div class="text-center mt-2">
                         <p class="font-bold text-lg">${review.name}</p>
