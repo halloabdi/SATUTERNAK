@@ -606,6 +606,18 @@
         const hapusBobotBtn = document.getElementById('hapus_bobot_btn');
         const samplingOptionsWrapper = document.getElementById('sampling_options_wrapper');
 
+        // === PERBAIKAN DIMULAI DI SINI ===
+        unitPakanSelect.addEventListener('change', function() {
+            if (this.value === 'sak') {
+                sakKgWrapper.classList.remove('hidden');
+                sakKgWrapper.querySelector('input').required = true;
+            } else {
+                sakKgWrapper.classList.add('hidden');
+                sakKgWrapper.querySelector('input').required = false;
+            }
+        });
+        // === PERBAIKAN SELESAI ===
+
         metodeBobotRadios.forEach(radio => {
             radio.addEventListener('change', () => {
                 if (radio.value === 'total') {
