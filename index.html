@@ -199,21 +199,6 @@
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" /><path fill-rule="evenodd" d="M10 9a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1H8a1 1 0 110-2h1V10a1 1 0 011-1z" clip-rule="evenodd" /></svg>
                         <h4 class="text-md font-bold">[UJI COBA] DokTanya</h4>
                     </div>
-                    <!-- Cari Rumah Sakit -->
-                    <div class="bg-green-500 text-white p-6 rounded-lg shadow-lg text-center flex flex-col justify-center items-center aspect-square">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /><path d="M10 9a1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1H8a1 1 0 110-2h1V10a1 1 0 011-1z" /></svg>
-                        <h4 class="text-md font-bold">[UJI COBA] Cari Rumah Sakit</h4>
-                    </div>
-                    <!-- Analisa AI -->
-                    <div class="bg-green-500 text-white p-6 rounded-lg shadow-lg text-center flex flex-col justify-center items-center aspect-square">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9v-2h2v2zm0-4H9V7h2v5zm4 4h-2v-2h2v2zm0-4h-2V7h2v5z"/></svg>
-                        <h4 class="text-md font-bold">[UJI COBA] Analisa AI</h4>
-                    </div>
-                    <!-- Daftar Anggota -->
-                    <div class="bg-green-500 text-white p-6 rounded-lg shadow-lg text-center flex flex-col justify-center items-center aspect-square">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 mb-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" /></svg>
-                        <h4 class="text-md font-bold">Daftar Anggota</h4>
-                    </div>
                 </div>
 
                 <!-- Wrapper Kalkulator IP Ternak (hidden) -->
@@ -237,10 +222,44 @@
                                         <label for="umur_panen" class="block text-gray-700 font-medium mb-2">Umur Panen (hari)</label>
                                         <input type="number" id="umur_panen" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Contoh: 35" required>
                                     </div>
+                                    
+                                    <!-- Pilihan Metode Bobot -->
                                     <div class="mb-4">
-                                        <label for="total_bobot_panen" class="block text-gray-700 font-medium mb-2">Total Bobot Panen (kg)</label>
-                                        <input type="number" step="0.01" id="total_bobot_panen" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Contoh: 1800.5" required>
+                                        <label class="block text-gray-700 font-medium mb-2">Metode Input Bobot</label>
+                                        <div class="flex gap-4">
+                                            <label class="flex items-center"><input type="radio" name="metode_bobot" value="total" class="mr-2" checked>Total Bobot</label>
+                                            <label class="flex items-center"><input type="radio" name="metode_bobot" value="satuan" class="mr-2">Bobot Satuan</label>
+                                        </div>
                                     </div>
+
+                                    <!-- Input Total Bobot -->
+                                    <div id="total_bobot_wrapper" class="mb-4">
+                                        <label for="total_bobot_panen" class="block text-gray-700 font-medium mb-2">Total Bobot Panen (kg)</label>
+                                        <input type="number" step="0.01" id="total_bobot_panen" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="Contoh: 1800.5">
+                                    </div>
+
+                                    <!-- Input Bobot Satuan -->
+                                    <div id="satuan_bobot_wrapper" class="hidden mb-4">
+                                        <label class="block text-gray-700 font-medium mb-2">Tipe Input Satuan</label>
+                                        <div class="flex gap-4 mb-2">
+                                            <label class="flex items-center"><input type="radio" name="tipe_satuan" value="sampling" class="mr-2" checked>Sampling</label>
+                                            <label class="flex items-center"><input type="radio" name="tipe_satuan" value="semua" class="mr-2">Hitung Semua</label>
+                                        </div>
+                                        <div id="sampling_options_wrapper" class="hidden mb-2">
+                                            <label for="sampling_percent" class="block text-gray-700 font-medium mb-1">Persentase Sampling (%)</label>
+                                            <input type="number" id="sampling_percent" value="25" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                                        </div>
+                                        <label class="block text-gray-700 font-medium mb-2">Data Bobot per Ekor (kg)</label>
+                                        <div id="bobot_kolom_container" class="space-y-2 max-h-48 overflow-y-auto pr-2">
+                                            <!-- Kolom input dinamis akan ditambahkan di sini -->
+                                        </div>
+                                        <div class="flex gap-2 mt-2">
+                                            <button type="button" id="tambah_bobot_btn" class="bg-blue-500 text-white text-sm font-bold py-1 px-3 rounded-lg hover:bg-blue-600">+ Tambah Kolom</button>
+                                            <button type="button" id="hapus_bobot_btn" class="bg-red-500 text-white text-sm font-bold py-1 px-3 rounded-lg hover:bg-red-600">- Hapus Kolom</button>
+                                        </div>
+                                        <p id="helper_text" class="text-xs text-gray-500 mt-1">Maksimal 25% dari jumlah panen.</p>
+                                    </div>
+
                                     <div class="mb-4">
                                         <label for="pakan" class="block text-gray-700 font-medium mb-2">Total Pakan</label>
                                         <div class="flex items-center space-x-2">
@@ -402,16 +421,96 @@
         const ipForm = document.getElementById('ip-form');
         const loaderWrapper = document.getElementById('loader-wrapper');
         const resultsContent = document.getElementById('results-content');
+        const metodeBobotRadios = document.querySelectorAll('input[name="metode_bobot"]');
+        const tipeSatuanRadios = document.querySelectorAll('input[name="tipe_satuan"]');
+        const totalBobotWrapper = document.getElementById('total_bobot_wrapper');
+        const satuanBobotWrapper = document.getElementById('satuan_bobot_wrapper');
+        const helperText = document.getElementById('helper_text');
+        const bobotKolomContainer = document.getElementById('bobot_kolom_container');
+        const tambahBobotBtn = document.getElementById('tambah_bobot_btn');
+        const hapusBobotBtn = document.getElementById('hapus_bobot_btn');
+        const samplingOptionsWrapper = document.getElementById('sampling_options_wrapper');
 
-        unitPakanSelect.addEventListener('change', () => {
-            if (unitPakanSelect.value === 'sak') {
-                sakKgWrapper.classList.remove('hidden');
-                document.getElementById('sak-kg').required = true;
-            } else {
-                sakKgWrapper.classList.add('hidden');
-                document.getElementById('sak-kg').required = false;
-            }
+        metodeBobotRadios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.value === 'total') {
+                    totalBobotWrapper.classList.remove('hidden');
+                    satuanBobotWrapper.classList.add('hidden');
+                    document.getElementById('total_bobot_panen').required = true;
+                } else {
+                    totalBobotWrapper.classList.add('hidden');
+                    satuanBobotWrapper.classList.remove('hidden');
+                    document.getElementById('total_bobot_panen').required = false;
+                    generateBobotColumns();
+                }
+            });
         });
+
+        tipeSatuanRadios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                if (radio.value === 'sampling') {
+                    samplingOptionsWrapper.classList.add('hidden');
+                } else {
+                    samplingOptionsWrapper.classList.add('hidden');
+                }
+                generateBobotColumns();
+            });
+        });
+        
+        document.getElementById('jumlah_panen').addEventListener('input', generateBobotColumns);
+        tambahBobotBtn.addEventListener('click', () => addBobotColumn(true));
+        hapusBobotBtn.addEventListener('click', removeBobotColumn);
+
+        function generateBobotColumns() {
+            bobotKolomContainer.innerHTML = '';
+            const tipeSatuan = document.querySelector('input[name="tipe_satuan"]:checked').value;
+            const jumlahPanen = parseInt(document.getElementById('jumlah_panen').value) || 0;
+            let count = 0;
+
+            if (tipeSatuan === 'sampling') {
+                samplingOptionsWrapper.classList.add('hidden');
+                tambahBobotBtn.classList.remove('hidden');
+                hapusBobotBtn.classList.remove('hidden');
+                helperText.textContent = `Masukkan data bobot sampling per ekor.`;
+                count = 5; // Start with 5 columns for sampling
+            } else { // Hitung Semua
+                samplingOptionsWrapper.classList.add('hidden');
+                tambahBobotBtn.classList.remove('hidden');
+                hapusBobotBtn.classList.remove('hidden');
+                count = jumlahPanen;
+                helperText.textContent = `Input sesuai jumlah ekor panen (${count} data).`;
+            }
+
+            for (let i = 0; i < count; i++) {
+                 addBobotColumn();
+            }
+        }
+        
+        function addBobotColumn(isManual = false) {
+             const currentInputs = bobotKolomContainer.querySelectorAll('input').length;
+             const tipeSatuan = document.querySelector('input[name="tipe_satuan"]:checked').value;
+             const jumlahPanen = parseInt(document.getElementById('jumlah_panen').value) || 0;
+
+             if (tipeSatuan === 'semua' && currentInputs >= jumlahPanen) {
+                 createModal(`Tidak bisa menambah lebih dari jumlah panen (${jumlahPanen} ekor).`);
+                 return;
+             }
+             
+             const newInput = document.createElement('input');
+             newInput.type = 'number';
+             newInput.step = '0.01';
+             newInput.className = 'w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 bobot-satuan';
+             newInput.placeholder = `Bobot Ekor ke-${currentInputs + 1} (kg)`;
+             bobotKolomContainer.appendChild(newInput);
+        }
+
+        function removeBobotColumn() {
+            const inputs = bobotKolomContainer.querySelectorAll('.bobot-satuan');
+            if (inputs.length > 0) {
+                bobotKolomContainer.removeChild(inputs[inputs.length - 1]);
+            }
+        }
+
 
         ipForm.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -425,8 +524,38 @@
                 const populasiAwal = parseFloat(document.getElementById('populasi').value);
                 const jumlahPanen = parseFloat(document.getElementById('jumlah_panen').value);
                 const umurPanen = parseFloat(document.getElementById('umur_panen').value);
-                const totalBobotPanen = parseFloat(document.getElementById('total_bobot_panen').value);
                 let totalPakan = parseFloat(document.getElementById('pakan').value);
+                let totalBobotPanen;
+
+                const metodeBobot = document.querySelector('input[name="metode_bobot"]:checked').value;
+
+                if (metodeBobot === 'total') {
+                    totalBobotPanen = parseFloat(document.getElementById('total_bobot_panen').value);
+                } else {
+                    const tipeSatuan = document.querySelector('input[name="tipe_satuan"]:checked').value;
+                    const bobotInputs = bobotKolomContainer.querySelectorAll('.bobot-satuan');
+                    const bobotArray = Array.from(bobotInputs).map(input => parseFloat(input.value)).filter(val => !isNaN(val));
+
+                    if (bobotArray.length === 0) {
+                        createModal("Data bobot satuan tidak valid atau kosong.");
+                        loaderWrapper.classList.add('hidden');
+                        return;
+                    }
+
+                    const totalBobotSample = bobotArray.reduce((a, b) => a + b, 0);
+
+                    if (tipeSatuan === 'sampling') {
+                        const avgBobotSample = totalBobotSample / bobotArray.length;
+                        totalBobotPanen = avgBobotSample * jumlahPanen;
+                    } else { // Hitung Semua
+                         if (bobotArray.length !== jumlahPanen) {
+                            createModal(`Jumlah data bobot (${bobotArray.length}) tidak sesuai dengan jumlah panen (${jumlahPanen}).`);
+                            loaderWrapper.classList.add('hidden');
+                            return;
+                        }
+                        totalBobotPanen = totalBobotSample;
+                    }
+                }
 
                 if (unitPakanSelect.value === 'sak') {
                     const beratPerSak = parseFloat(document.getElementById('sak-kg').value);
@@ -492,20 +621,23 @@
         ipForm.addEventListener('reset', () => {
              resultsContent.classList.add('hidden');
              loaderWrapper.classList.add('hidden');
-             sakKgWrapper.classList.add('hidden');
+             satuanBobotWrapper.classList.add('hidden');
+             totalBobotWrapper.classList.remove('hidden');
+             document.querySelector('input[name="metode_bobot"][value="total"]').checked = true;
+             bobotKolomContainer.innerHTML = '';
         });
 
         // Script untuk Ulasan
         function initUlasanScroller() {
             const reviews = [
-                { name: 'Mas A1', role: 'Staf Dinas Peternakan', text: 'Menurut Saya aplikasi ini sangat bagus karena membantu peternak.', img: '' },
-                { name: 'Miss H.', role: 'Staf PT. Pencari Cinta Sejati', text: 'Menurut Saya aplikasi ini sangat bagus karena membantu peternak.', img: '' },
-                { name: 'Sento Cahya', role: 'Staf PUPR', text: 'Menurut Saya aplikasi ini sangat bagus karena membantu peternak.', img: '' },
-                { name: 'Bapak Sutrisno', role: 'Peternak Ayam Petelur, Blitar', text: 'Sangat membantu! Fitur analisis finansialnya membuat saya lebih mudah menghitung BEP dan keuntungan. Wajib dicoba!', img: '' },
-                { name: 'Ibu Rina Wulandari', role: 'Dosen Fakultas Peternakan', text: 'Sebagai akademisi, saya melihat SATU TERNAK sebagai alat edukasi yang luar biasa. Perhitungan FCR dan IP-nya akurat.', img: '' },
-                { name: 'Agung Prasetyo', role: 'Mahasiswa Agribisnis', text: 'Aplikasi ini jadi andalan saya untuk tugas kuliah dan riset. Datanya lengkap dan antarmukanya mudah dipahami. Keren!', img: '' },
-                { name: 'CV. Mitra Jaya Farm', role: 'Perusahaan Kemitraan Unggas', text: 'Memudahkan kami dalam memonitor performa kandang mitra. Fitur deplesi dan ADG sangat informatif.', img: '' },
-                { name: 'Drh. Anisa Putri', role: 'Dokter Hewan & Konsultan', text: 'Platform yang prospektif. Saya sering merekomendasikan ini ke klien untuk mencatat data kesehatan ternak.', img: '' },
+                { name: 'Mas A1', role: 'Staf Dinas Peternakan', text: 'Menurut Saya aplikasi ini sangat bagus karena membantu peternak.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfroviHf06NT8Ku3YRA9niyyRfLXgXIQMwhw&s' },
+                { name: 'Miss H.', role: 'Staf PT. Pencari Cinta Sejati', text: 'Menurut Saya aplikasi ini sangat bagus karena membantu peternak.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSov-etQpgMXG90BzInbdunpghXNPFHCTQCFA&s' },
+                { name: 'Sento Cahya', role: 'Staf PUPR', text: 'Menurut Saya aplikasi ini sangat bagus karena membantu peternak.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh9Ksweb38ZjZ2r45bsonRY6A0Aq8rwr8Qmg&s' },
+                { name: 'Bapak Sutrisno', role: 'Peternak Ayam Petelur, Blitar', text: 'Sangat membantu! Fitur analisis finansialnya membuat saya lebih mudah menghitung BEP dan keuntungan. Wajib dicoba!', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeNdgpQG75jF4ylDm5b7zNlOQq_Z3QTsJOCQ&s' },
+                { name: 'Ibu Rina Wulandari', role: 'Dosen Fakultas Peternakan', text: 'Sebagai akademisi, saya melihat SATU TERNAK sebagai alat edukasi yang luar biasa. Perhitungan FCR dan IP-nya akurat.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfroviHf06NT8Ku3YRA9niyyRfLXgXIQMwhw&s' },
+                { name: 'Agung Prasetyo', role: 'Mahasiswa Agribisnis', text: 'Aplikasi ini jadi andalan saya untuk tugas kuliah dan riset. Datanya lengkap dan antarmukanya mudah dipahami. Keren!', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSov-etQpgMXG90BzInbdunpghXNPFHCTQCFA&s' },
+                { name: 'CV. Mitra Jaya Farm', role: 'Perusahaan Kemitraan Unggas', text: 'Memudahkan kami dalam memonitor performa kandang mitra. Fitur deplesi dan ADG sangat informatif.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQh9Ksweb38ZjZ2r45bsonRY6A0Aq8rwr8Qmg&s' },
+                { name: 'Drh. Anisa Putri', role: 'Dokter Hewan & Konsultan', text: 'Platform yang prospektif. Saya sering merekomendasikan ini ke klien untuk mencatat data kesehatan ternak.', img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTeNdgpQG75jF4ylDm5b7zNlOQq_Z3QTsJOCQ&s' },
             ];
 
             const scrollerInner = document.querySelector('.scroller-inner');
@@ -517,8 +649,8 @@
                 const reviewCard = document.createElement('div');
                 reviewCard.className = 'relative bg-green-600 text-white pt-12 p-5 rounded-xl shadow-lg w-80 flex-shrink-0 text-left';
                 reviewCard.innerHTML = `
-                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full border-4 border-white shadow-md bg-gray-300 overflow-hidden">
-                        <img src="${review.img}" alt="${review.name}" class="w-full h-full object-cover">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 rounded-full border-4 border-white shadow-md bg-gray-300">
+                        <img src="${review.img}" alt="${review.name}" class="w-full h-full object-cover rounded-full">
                     </div>
                     <div class="text-center mt-2">
                         <p class="font-bold text-lg">${review.name}</p>
